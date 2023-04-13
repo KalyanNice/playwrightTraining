@@ -3,5 +3,14 @@
         "username": "Admin",
         "password": "admin123"
     },
-    "login": "Login"
+    "login": "Login",
+    "success": "Success",
+    "candidateDetails": {
+        "firstName": "John",
+        "middleName": "Matt",
+        "lastName": "Sean",
+        "email": "john@yahoo.com",
+        "contact": "1231231234",
+        "date": "2023-04-12"
+    }
 }

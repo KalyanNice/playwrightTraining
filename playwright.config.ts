@@ -11,7 +11,7 @@ import { defineConfig, devices } from '@playwright/test';
  */
 export default defineConfig({
   testDir: './e2e',
-  testMatch: ["tests/login.spec.ts"],
+  // testMatch: ["tests/add-candidate.spec.ts"],
   /* Run tests in files in parallel */
   fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -36,8 +36,15 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: "Chromium",
+      use: {
+        browserName: "chromium",
+        viewport: null,
+        launchOptions: {
+          args: ["--start-maximized"]
+          // slowMo: 100
+        }
+      },
     },
 
     // {

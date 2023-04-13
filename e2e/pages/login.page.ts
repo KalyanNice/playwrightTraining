@@ -1,4 +1,6 @@
 import { Page } from '@playwright/test';
+import CONSTANTS from "../utils/constants.json";
+import { Utils } from '../utils/commons';
 
 export class LoginPage {
     // static DEFAULT_TIMEOUT = 2_000;
@@ -10,29 +12,23 @@ export class LoginPage {
     passwordField = 'input[name="password"]';
     loginButton = 'button[type="submit"]';
 
+    utils: Utils;
 
-    constructor(private page: Page) { }
+    constructor(private page: Page) { 
+        this.utils = new Utils(page);
+    }
 
     async gotoBaseUrl() {
         await this.page.goto('/');
     }
 
-    async close() {
-        await this.page.close();
-    }
-    async fillValue(selector: string, value: string) {
-        await this.page.locator(selector).fill(value);
-    }
-
     async getTextContent(selector: string) {
-        return await this.page.textContent(selector);
+        return await this.utils.getTextContent(selector);
     }
 
-    async isVisible(selector: string): Promise<boolean> {
-        return await this.page.locator(selector).isVisible();
-    }
-
-    async performClick(selector: string): Promise<void> {
-        return await this.page.locator(selector).click();
+    async login() {
+        await this.utils.fillValue(this.usernameField, CONSTANTS.credentials.username);
+        await this.utils.fillValue(this.passwordField, CONSTANTS.credentials.password);
+        await this.utils.performClick(this.loginButton);
     }
 }

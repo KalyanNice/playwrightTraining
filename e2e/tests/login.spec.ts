@@ -11,7 +11,6 @@ test.beforeAll(async ({ browser }) => {
     loginPage = new LoginPage(page);
     await loginPage.gotoBaseUrl();
     await expect(page).toHaveURL(/login/);
-
 });
 
 test.afterAll(async () => {
@@ -24,9 +23,7 @@ test.describe('login page', () => {
     });
 
     test('submit login form', async () => {
-        await loginPage.fillValue(loginPage.usernameField, CONSTANTS.credentials.username);
-        await loginPage.fillValue(loginPage.passwordField, CONSTANTS.credentials.password);
-        await loginPage.performClick(loginPage.loginButton);
+        await loginPage.login();
         await expect(page).toHaveURL(/dashboard\/index/);
     });
 });
